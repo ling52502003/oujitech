@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ja">
+
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet"
+	id="bootstrap-css" />
+<link th:href="@{/css/style.css}" rel="stylesheet" />
+<script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/myUsers.js}"></script>
+<title>Login</title>
+</head>
+<body>
+	<div class="container">
+		<div class="card card-container">
+			<div class="alert alert-danger" th:if="${validationError}"
+				th:text="${validationError}"></div>
+			<img id="profile-img" class="profile-img-card"
+				src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
+			<p id="profile-name" class="profile-name-card"></p>
+			<form class="form-signin" th:action="@{/loginUser/loginCheck}"
+				th:object="${userInfo}" method="post">
+				<span id="reauth-email" class="reauth-email"></span> <input
+					type="email" id="inputEmail" class="form-control" name="email"
+					placeholder="メールアドレス" required="required" autofocus="autofocus" />
+				<span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
+					class="help-block">error!</span> <input type="password"
+					id="inputPassword" class="form-control" placeholder="パスワード"
+					required="required" name="password" />
+				<div id="remember" class="checkbox">
+					<label> <input type="checkbox" value="remember-me" />
+						ログイン状態を保存する
+					</label>
+				</div>
+				<button class="btn btn-lg btn-primary btn-block btn-signin"
+					type="submit">ログイン</button>
+			</form>
+			<a href="#" class="forgot-password">パスワードをお忘れですか？ </a>
+		</div>
+
+	</div>
+</body>
+</html>
